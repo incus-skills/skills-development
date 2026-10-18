@@ -1,6 +1,6 @@
 # Canonical Diagram Policy
 
-**Revision:** 2.0  
+**Revision:** 2.1  
 **Status:** Initial published baseline  
 **Authority:** This document is normative for diagram work in this repository and for consumers that explicitly adopt it.
 
@@ -24,6 +24,16 @@ This policy governs diagrams in project artifacts, README files, methodology doc
 7. **Named boundaries.** Use labelled Mermaid `subgraph` blocks to group phases, scopes, or boundaries when those groupings are part of the intended structure.
 8. **Semantic styling only.** Styling must encode meaning, not decoration. Red fill is reserved for error paths, grey fill for terminal states, and green fill for primary output. Do not add aesthetic styling. Where color could be unavailable or ambiguous, labels and graph structure must still convey the essential meaning.
 9. **One concern per diagram.** Each diagram should address one concern. Diagrams with more than approximately 15 nodes must be reviewed for possible splitting. Split only when doing so preserves the relationships needed to understand each concern. For example, a SPEC architecture diagram and an RSS loop diagram are distinct concerns and must be separate.
+
+### 2.9.1 Routing-graph exception to the single-concern rule
+
+A normative routing graph may express the complete task-to-action path (module selection → action-class identification → reference routing → execution gate → tool invocation) in a single diagram. This is a scoped exception to the single-concern rule above because:
+
+- The normative claim is a property of the complete path, not any one segment.
+- Splitting the path across diagrams requires the consumer to reconstruct traversal order across artifacts, reintroducing sequential interpretation that the graph is intended to avoid.
+- Relationship semantics such as `requires` and `governs` must be interpreted in relation to the full path they span.
+
+**Constraint:** the exception covers only the task-to-action path. It does not permit adding unrelated concerns such as deployment topology, data flow between services, or error handling for unrelated subsystems. A distinct concern requires a separate diagram. The graph remains subject to all other policy requirements, including independent semantic validation and explicit edge semantics.
 10. **Source is canonical.** Mermaid source is the canonical diagram artifact. Rendered PNG/SVG images do not replace or supersede the source.
 11. **Validate semantics, not just syntax.** Successful parsing or rendering is not proof of correctness. Compare nodes, edges, direction, labels, outcomes, cycles, boundaries, and invariants against an independently established intended structure.
 12. **Preserve meaning across edits.** Preserve explicit graph relationships and intended meaning. Do not silently repair, simplify, rename, merge, reorder, or remove structures if that changes meaning. Proposed semantic changes require explicit authorization and a recorded rationale.
@@ -94,5 +104,6 @@ These are candidate tests, not existing or validated diagrams. Self-application 
 
 | Revision | Summary |
 |---|---|
+| 2.1 | Added a bounded exception allowing normative routing graphs to preserve the complete task-to-action path in one diagram; clarified that the exception does not authorize unrelated concerns. |
 | 2.0 | Formalized the 13-rule policy; added semantic validation, meaning preservation, independent interpretability, intended-structure references, and explicit authority/conflict handling. |
 | 1.0 | Initial 10-rule version. |
