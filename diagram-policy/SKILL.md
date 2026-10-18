@@ -1,10 +1,10 @@
 ---
 name: diagram-policy
 description: Authors, reads, extracts, reviews, and validates Mermaid diagrams against the canonical diagram policy. Use when creating, editing, reviewing, or explaining diagrams in project artifacts.
-version: "1.0.0"
+version: "1.1.0"
 metadata:
-  version: "1.0.0"
-  policy_revision: "2.0"
+  version: "1.1.0"
+  policy_revision: "2.1"
 ---
 
 # Diagram Policy Skill
@@ -43,7 +43,7 @@ If no structured baseline exists, build the smallest reference that the authorit
 
 ## 3. Authoring procedure
 
-1. Define one concern and the intended audience.
+1. Define the concern and intended audience. Apply the single-concern rule, checking the canonical policy for scoped exceptions before splitting a graph.
 2. List the required nodes, relationships, decisions, conditions, cycles, boundaries, terminal states, and invariants before writing Mermaid.
 3. Use Mermaid source only. Prefer clear node IDs and labels that preserve domain terms.
 4. Use `{"Decision?"}` for flowchart decision nodes and label every outcome edge.
@@ -51,7 +51,7 @@ If no structured baseline exists, build the smallest reference that the authorit
 6. Use edge styles consistently: `-->` transition/flow; `-.-` observational/relational; `-.->` directional observational. Label relationships where style alone would be ambiguous.
 7. Use labelled `subgraph` blocks for meaningful phases, scopes, and boundaries.
 8. Apply only semantic styling: red fill for error paths, grey fill for terminal states, green fill for primary output. Essential meaning must remain available without color.
-9. Keep one concern per diagram. Review diagrams exceeding approximately 15 nodes for splitting, without severing necessary relationships.
+9. Keep one concern per diagram, subject to the canonical policy’s scoped exceptions. Review diagrams exceeding approximately 15 nodes for splitting, but do not split a normative routing graph whose complete task-to-action path is the unit of meaning. Keep that path together; exclude unrelated concerns and validate the full path semantically.
 10. Preserve the Mermaid source as canonical; any rendered image is derivative.
 
 Do not add a relationship because it makes the diagram visually smoother. Do not remove an awkward relationship because it makes the diagram simpler.
@@ -121,6 +121,8 @@ When a defect is found:
 If policy and skill disagree, do not resolve the conflict by choosing whichever text is easier to follow. Apply the compatibility gate and stop the affected operation until resolution is recorded.
 
 ## 7. Regression tests and status
+
+The single-concern rule includes a scoped exception for normative routing graphs that must preserve the complete task-to-action path. When authoring or reviewing such a graph, verify that the graph contains only that path, that required relationship semantics are interpreted in the context of the whole path, and that the complete graph is validated against an independent intended-structure reference. The exception does not waive any other policy requirement.
 
 The initial regression cases are:
 
