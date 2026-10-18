@@ -6,6 +6,7 @@ This repository is independent of any one skills tree. In particular, it does no
 
 ## What belongs here
 
+- **Collection-level development model** — the distinct movements through which skills are formed, derived, and composed.
 - **Development framework** — criteria and method for creating and extending skills.
 - **Canonical diagram policy** — normative rules for Mermaid diagrams.
 - **Portable diagram-policy skill** — an operational procedure that applies the policy.
@@ -15,6 +16,7 @@ This repository is independent of any one skills tree. In particular, it does no
 
 | Path | Authority and purpose |
 |---|---|
+| [`DEVELOPMENT_MODEL.md`](DEVELOPMENT_MODEL.md) | Provisional model of context-derived formation, specification-derived development, and third-party capability composition |
 | [`SKILL_DEVELOPMENT.md`](SKILL_DEVELOPMENT.md) | Canonical development framework and preserved observer position |
 | [`diagram-policy/POLICY.md`](diagram-policy/POLICY.md) | Normative Mermaid diagram requirements |
 | [`diagram-policy/SKILL.md`](diagram-policy/SKILL.md) | Portable operational skill implementing the policy |
