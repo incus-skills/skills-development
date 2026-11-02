@@ -2,12 +2,14 @@
 name: session-thread-mining
 description: >
   Performs structure-preserving chunking and bidirectional analysis of AI
-  conversation sessions. Supports linear and tree-preserving exports,
-  selectable observation points, forward, backward and branch traversal,
-  independent reconstructive and intentional observers, and provenance-aware
-  reconciliation. Use when mining long conversations, reconstructing decisions,
-  extracting requirements or design intent, analysing correction sequences,
-  or preparing session material for further AI processing.
+  conversation sessions across direct text, structured exports, imported
+  archives, knowledge stores and agent-accessible retrieval or memory tools.
+  Supports selectable observation points, forward, backward and branch
+  traversal, independent reconstructive and intentional observers, and
+  provenance-aware reconciliation. Use when mining long conversations,
+  reconstructing decisions, extracting requirements or design intent,
+  analysing correction sequences, or preparing session material for further
+  AI processing.
 version: "1.0.0"
 metadata:
   policy_revision: "2.2"
@@ -117,7 +119,9 @@ Record:
 - Ordering information and timestamps, if present.
 - Missing, ambiguous or flattened structural information.
 
-Do not infer missing parent relationships from textual proximity alone.
+Do not infer missing parent relationships from textual proximity alone. Also
+record whether a relationship is absent from the underlying source, unavailable
+through the current access mechanism, or simply not yet retrieved.
 
 ### 2.3 Representation handling
 
@@ -134,6 +138,98 @@ Do not infer missing parent relationships from textual proximity alone.
 A linear source is not invalid because it lacks tree information. Its
 limitations must remain visible.
 
+### 2.4 Agent-accessible sources
+
+The source need not be presented as a single file or export. In an agentic
+environment, the material may be exposed through the capabilities available
+to the agent. Examples include:
+
+1. **Direct linear material:** pasted text, Markdown, transcripts or message
+   sequences supplied in the current context.
+2. **Structured conversation exports:** exported histories that retain
+   message identifiers, parent-child relationships, branches or metadata.
+3. **Imported conversation archives:** histories transferred into another
+   agent environment and exposed through a memory provider or other plugin.
+4. **Knowledge-store representations:** conversations or extracted messages
+   held in an Obsidian vault, an LLMWiki-style knowledge base or another
+   retrieval-backed store.
+5. **Agent-accessible sources:** material discoverable and retrievable through
+   tools, plugins, connectors or memory interfaces, where the agent must
+   establish how to locate and navigate it.
+
+These are examples of access and representation conditions, not supported
+integration specifications. The skill does not prescribe a parser, adapter,
+plugin, storage schema or retrieval API. It defines the analytical method and
+the requirements by which the available representation is assessed.
+
+#### Separate access, representation and underlying source
+
+| Concern | Meaning | Required treatment |
+|---|---|---|
+| Source access | How the agent obtains or navigates material in its environment | Discover and describe the capabilities actually available |
+| Available representation | The content, identities, metadata and relationships exposed to the agent | Inspect and record what is actually observable |
+| Underlying source | The original conversation, archive or knowledge material from which the representation derives | Do not make claims about inaccessible structure or completeness |
+| Session mining | The observation, traversal, chunking and analysis method | Apply the same evidence and provenance discipline across environments |
+
+The analytical method is invariant; the access mechanism may vary. The skill
+governs session mining and establishes requirements for assessing the
+available representation. It does not prescribe source access.
+
+#### Retrieval and transformation safeguards
+
+1. Source material may be accessed directly, through files, through retrieval
+   tools, through memory providers or through other agent capabilities.
+2. A retrieval result is not automatically a complete representation of the
+   underlying source.
+3. Search results and retrieved fragments may expose selected content without
+   exposing original message identity, ancestry, branch membership or
+   neighbouring context.
+4. Distinguish information that is **unavailable through the current
+   interface** from information that is **not yet retrieved or examined**.
+   Do not mark material absent merely because a query did not return it.
+5. Do not infer that an underlying conversation was linear because the
+   current retrieval interface exposes isolated messages or flattened text.
+   Record that the interface has not exposed the relevant tree structure.
+6. Record import, indexing, transformation, summarisation, chunking or
+   retrieval steps when they affect content, identity, ordering, provenance
+   or structural interpretation.
+7. Where possible, retain links from retrieved material to its original
+   source identifiers and locations. If those links are unavailable, record
+   the provenance limitation rather than inventing a mapping.
+8. Treat retrieval scope, query terms, filters, pagination, result limits and
+   access restrictions as potential coverage constraints. Record them when
+   they materially limit what could be observed.
+9. Do not treat a memory summary, semantic-search result or knowledge-store
+   excerpt as an exhaustive source inventory unless the system provides
+   evidence that it is exhaustive.
+
+A retrieval miss establishes only that the current access operation did not
+return the material. It does not establish that the material does not exist.
+
+#### Agent-access assessment
+
+Before mining agent-accessible material, record:
+
+| Field | Description |
+|---|---|
+| Access mechanism | File access, direct context, search, memory provider, plugin, connector or other tool |
+| Accessible scope | Which archive, vault, collection, conversation or namespace can be queried |
+| Discovery method | How source items are located |
+| Retrieval method | How messages or fragments are obtained |
+| Navigation capability | Whether parent, child, sibling, branch or adjacent-item traversal is supported |
+| Identity and provenance | Identifiers and original source locations exposed |
+| Completeness guarantees | Any documented guarantee about exhaustive enumeration; otherwise record as unknown |
+| Retrieval constraints | Query limits, filters, pagination, truncation or access restrictions |
+| Transformations | Known import, indexing, summarisation or normalization steps |
+| Unavailable capabilities | Relationships or source regions the interface does not expose |
+
+Do not assume a memory provider or knowledge store offers exhaustive search,
+stable message identity, chronological ordering or graph navigation. Verify
+each capability from the actual interface and its observed behaviour.
+
+### 2.5 Structural integrity
+
+When a tree-preserving source is available:
 ### 2.4 Structural integrity
 
 When a tree-preserving source is available:
@@ -831,6 +927,10 @@ correct diagram type is part of semantic clarity.
 ### 13.1 Do not
 
 - Treat a plain-text source as if it retained conversation-tree structure.
+- Treat a retrieval result as an exhaustive source representation without evidence.
+- Treat a retrieval miss as proof that source material does not exist.
+- Infer that the underlying source is linear because an access interface exposes only linear fragments.
+- Conflate unavailable information with information not yet retrieved.
 - Assume chronological sequence is the only valid traversal.
 - Assume the final outcome proves historical intention.
 - Interpret every correction as evidence of a consciously held earlier
@@ -850,6 +950,9 @@ correct diagram type is part of semantic clarity.
 | Failure | Consequence | Prevention |
 |---|---|---|
 | Linearisation of a tree | Loss of branch and ancestry information | Preserve structural index |
+| Retrieval-as-source assumption | Selected fragments mistaken for the complete archive | Record access scope and completeness guarantees |
+| Interface/source conflation | Access limitations mistaken for original source properties | Separate underlying source from available representation |
+| Retrieval absence assumption | Unreturned material treated as nonexistent | Distinguish unavailable from not yet retrieved |
 | Chronological-only analysis | Missed reverse and branch insights | Select observation points |
 | Premature summarisation | Loss of distinctions and corrections | Evidence-first chunking |
 | Retrospective projection | False historical certainty | Intentional-observer safeguard |
@@ -867,7 +970,7 @@ examined and its limitations are explicit.
 
 | Requirement | Completion condition |
 |---|---|
-| Source recognition | Representation and limitations recorded |
+| Source recognition | Access mechanism, available representation, underlying-source limits and transformations recorded |
 | Structural preservation | Available relationships indexed |
 | Source coverage | Supplied source accounted for, with exclusions and gaps recorded |
 | Observation selection | Observation point and rationale recorded |
