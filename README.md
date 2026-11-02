@@ -13,6 +13,7 @@ This repository is independent of any one skills tree. In particular, it does no
 - **Portable diagram-policy skill** — an operational procedure that applies the diagram policy.
 - **Domain-scoped policies** — reusable normative requirements with an explicit subject, applicability boundary, provenance, adoption conditions, and validation expectations.
 - **Portable content-emission skill** — an operational procedure for applying the heredoc and content-emission policy.
+- **Portable session-thread-mining skill** — a structure-preserving method for chunking and analysing linear or tree-preserving AI conversation exports from selectable observation points, traversal directions, and independent observer positions.
 - **Contribution and validation practice** — how changes are assessed and how uncertainty is recorded.
 
 ## Documents
@@ -26,6 +27,7 @@ This repository is independent of any one skills tree. In particular, it does no
 | [diagram-policy/SKILL.md](diagram-policy/SKILL.md) | Portable operational skill implementing the diagram policy |
 | [heredoc/POLICY.md](heredoc/POLICY.md) | Proposed general-purpose heredoc and content-emission requirements for adopting scripts and projects |
 | [heredoc/SKILL.md](heredoc/SKILL.md) | Portable skill for filesystem emission, terminal reporting, and standalone `emit_*` scripts |
+| [session-thread-mining/SKILL.md](session-thread-mining/SKILL.md) | Portable analytical skill for structure-preserving conversation chunking, thread traversal, dual observation, and provenance-aware reconciliation |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contributor workflow and review expectations |
 
 Policies define requirements within their declared authority and scope; skills and procedures operationalize them. A domain-scoped policy does not silently govern projects that have not adopted it. If an applicable policy and procedure conflict, surface the conflict rather than silently resolving it.
