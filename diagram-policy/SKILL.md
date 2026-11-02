@@ -1,9 +1,9 @@
 ---
 name: diagram-policy
 description: Authors, reads, extracts, reviews, and validates Mermaid diagrams against the canonical diagram policy. Use when creating, editing, reviewing, or explaining diagrams in project artifacts.
-version: "1.1.0"
+version: "1.1.1"
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
   policy_revision: "2.1"
 ---
 
@@ -23,7 +23,7 @@ Do not skip step 2 just because a diagram already exists.
 
 Apply the canonical requirements in [`POLICY.md`](POLICY.md) when authoring, reading, extracting, reviewing, or validating diagrams. This skill is procedural; the policy is normative.
 
-**Policy compatibility gate:** this skill declares policy revision `2.0`. Before use, inspect the governing policy and verify its revision. If the policy is missing or unreadable, stop the affected operation and report compatibility as unverified. If the skill is behind the policy, stop until updated. If the skill declares a later revision than the available policy, stop and verify the authoritative policy distribution. If policy and skill conflict, identify the conflicting provisions and impact, then stop the affected operation until an authorized resolution is recorded. Do not treat missing policy as absence of constraints.
+**Policy compatibility gate:** this skill declares policy revision `2.1`. Before use, inspect the governing policy and verify its revision. If the policy is missing or unreadable, stop the affected operation and report compatibility as unverified. If the skill is behind the policy, stop until updated. If the skill declares a later revision than the available policy, stop and verify the authoritative policy distribution. If policy and skill conflict, identify the conflicting provisions and impact, then stop the affected operation until an authorized resolution is recorded. Do not treat missing policy as absence of constraints.
 
 ## 2. Establish intended structure
 
