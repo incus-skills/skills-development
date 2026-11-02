@@ -190,7 +190,7 @@ write_file() {
   done
 
   if [[ $# -ne 1 || -z "$1" ]]; then
-    printf '%s\\n' "usage: write_file [-a] [-s] DEST" >&2
+    printf '%s\n' "usage: write_file [-a] [-s] DEST" >&2
     return 2
   fi
 
