@@ -10,8 +10,9 @@ This repository is independent of any one skills tree. In particular, it does no
 - **Project skill** — self-contained operational entry point for work in this repository, provisional and evidence-revisable.
 - **Development framework** — criteria and method for creating and extending skills.
 - **Canonical diagram policy** — normative rules for Mermaid diagrams.
-- **Portable diagram-policy skill** — an operational procedure that applies the policy.
+- **Portable diagram-policy skill** — an operational procedure that applies the diagram policy.
 - **Domain-scoped policies** — reusable normative requirements with an explicit subject, applicability boundary, provenance, adoption conditions, and validation expectations.
+- **Portable content-emission skill** — an operational procedure for applying the heredoc and content-emission policy.
 - **Contribution and validation practice** — how changes are assessed and how uncertainty is recorded.
 
 ## Documents
@@ -23,7 +24,8 @@ This repository is independent of any one skills tree. In particular, it does no
 | [SKILL_DEVELOPMENT.md](SKILL_DEVELOPMENT.md) | Canonical development framework and preserved observer position |
 | [diagram-policy/POLICY.md](diagram-policy/POLICY.md) | Normative Mermaid diagram requirements |
 | [diagram-policy/SKILL.md](diagram-policy/SKILL.md) | Portable operational skill implementing the diagram policy |
-| [provisioning/HEREDOC_POLICY.md](provisioning/HEREDOC_POLICY.md) | Proposed heredoc and multi-line content policy for provisioning scripts that explicitly adopt it; not a universal shell policy |
+| [heredoc/POLICY.md](heredoc/POLICY.md) | Proposed general-purpose heredoc and content-emission requirements for adopting scripts and projects |
+| [heredoc/SKILL.md](heredoc/SKILL.md) | Portable skill for filesystem emission, terminal reporting, and standalone `emit_*` scripts |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contributor workflow and review expectations |
 
 Policies define requirements within their declared authority and scope; skills and procedures operationalize them. A domain-scoped policy does not silently govern projects that have not adopted it. If an applicable policy and procedure conflict, surface the conflict rather than silently resolving it.
@@ -46,7 +48,7 @@ This is an orientation diagram, not a substitute for the detailed procedure in [
 
 ## Current status
 
-The repository's initial framework and policy documents are being established. The heredoc policy is proposed and is normative only for projects that explicitly adopt it. A skill being present or discoverable does **not** mean it has been validated. Validation status must be reported from executed checks and recorded evidence, not inferred from registration.
+The repository's initial framework and policy documents are being established. The heredoc and content-emission policy is proposed and is normative only for projects that explicitly adopt it. A skill being present or discoverable does **not** mean it has been validated. Validation status must be reported from executed checks and recorded evidence, not inferred from registration.
 
 ## Core principle
 
