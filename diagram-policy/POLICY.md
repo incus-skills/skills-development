@@ -1,6 +1,6 @@
 # Canonical Diagram Policy
 
-**Revision:** 2.1  
+**Revision:** 2.2  
 **Status:** Initial published baseline  
 **Authority:** This document is normative for diagram work in this repository and for consumers that explicitly adopt it.
 
@@ -34,10 +34,41 @@ A normative routing graph may express the complete task-to-action path (module s
 - Relationship semantics such as `requires` and `governs` must be interpreted in relation to the full path they span.
 
 **Constraint:** the exception covers only the task-to-action path. It does not permit adding unrelated concerns such as deployment topology, data flow between services, or error handling for unrelated subsystems. A distinct concern requires a separate diagram. The graph remains subject to all other policy requirements, including independent semantic validation and explicit edge semantics.
-10. **Source is canonical.** Mermaid source is the canonical diagram artifact. Rendered PNG/SVG images do not replace or supersede the source.
-11. **Validate semantics, not just syntax.** Successful parsing or rendering is not proof of correctness. Compare nodes, edges, direction, labels, outcomes, cycles, boundaries, and invariants against an independently established intended structure.
-12. **Preserve meaning across edits.** Preserve explicit graph relationships and intended meaning. Do not silently repair, simplify, rename, merge, reorder, or remove structures if that changes meaning. Proposed semantic changes require explicit authorization and a recorded rationale.
-13. **Make the source independently interpretable.** Do not rely on color, layout, or surrounding prose alone to convey essential relationships. Mermaid improves extractability but does not guarantee correct interpretation.
+
+10. **Select diagram syntax by semantic type.** Choose the Mermaid diagram type according to the structure being represented, not visual preference:
+    - Use `flowchart` for process and workflow sequences, decision paths, dependencies, routing, and control-flow topology.
+    - Use `stateDiagram-v2` for state machines and lifecycle models whose primary elements are states and state-dependent transitions. Use it to express events, guards, initial/final states, and state invariants or constraints.
+    - Do not use a flowchart as a substitute for a state machine when behaviour depends on the system's current state. Do not use a state diagram merely to lay out a sequence of procedural activities or decisions.
+    - If both process flow and state-dependent behaviour are independently material, create separate complementary diagrams. State their respective concerns and cross-reference them; do not overload one diagram or imply that one notation fully captures the other.
+    - If the distinction is unclear from the authoritative source, preserve the ambiguity in the intended-structure reference and resolve it before choosing a notation.
+
+    **Flowchart example — process and decision path:**
+
+    ```mermaid
+    flowchart TD
+        A[Receive request] --> B{Request valid?}
+        B -->|Yes| C[Process request]
+        B -->|No| D[Reject request]
+        C --> E[Return result]
+    ```
+
+    **State diagram example — lifecycle and guarded transitions:**
+
+    ```mermaid
+    stateDiagram-v2
+        [*] --> Pending
+        Pending --> Active: approve [checks_pass]
+        Pending --> Rejected: reject
+        Active --> Suspended: suspend [policy_allows]
+        Suspended --> Active: resume [checks_pass]
+        Active --> [*]: complete
+        Rejected --> [*]
+    ```
+
+11. **Source is canonical.** Mermaid source is the canonical diagram artifact. Rendered PNG/SVG images do not replace or supersede the source.
+12. **Validate semantics, not just syntax.** Successful parsing or rendering is not proof of correctness. Compare nodes, edges, direction, labels, outcomes, cycles, boundaries, and invariants against an independently established intended structure.
+13. **Preserve meaning across edits.** Preserve explicit graph relationships and intended meaning. Do not silently repair, simplify, rename, merge, reorder, or remove structures if that changes meaning. Proposed semantic changes require explicit authorization and a recorded rationale.
+14. **Make the source independently interpretable.** Do not rely on color, layout, or surrounding prose alone to convey essential relationships. Mermaid improves extractability but does not guarantee correct interpretation.
 
 ## 3. Authority and conflict handling
 
@@ -104,6 +135,7 @@ These are candidate tests, not existing or validated diagrams. Self-application 
 
 | Revision | Summary |
 |---|---|
+| 2.2 | Added normative Mermaid diagram-type selection: flowcharts for process/control flow, state diagrams for state-dependent behaviour, and complementary diagrams when both concerns are material. |
 | 2.1 | Added a bounded exception allowing normative routing graphs to preserve the complete task-to-action path in one diagram; clarified that the exception does not authorize unrelated concerns. |
-| 2.0 | Formalized the 13-rule policy; added semantic validation, meaning preservation, independent interpretability, intended-structure references, and explicit authority/conflict handling. |
+| 2.0 | Formalized the 14-rule policy; added semantic validation, meaning preservation, independent interpretability, intended-structure references, and explicit authority/conflict handling. |
 | 1.0 | Initial 10-rule version. |

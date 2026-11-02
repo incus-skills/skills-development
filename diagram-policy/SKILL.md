@@ -1,10 +1,10 @@
 ---
 name: diagram-policy
 description: Authors, reads, extracts, reviews, and validates Mermaid diagrams against the canonical diagram policy. Use when creating, editing, reviewing, or explaining diagrams in project artifacts.
-version: "1.1.1"
+version: "1.2.0"
 metadata:
   version: "1.1.1"
-  policy_revision: "2.1"
+  policy_revision: "2.2"
 ---
 
 # Diagram Policy Skill
@@ -23,7 +23,7 @@ Do not skip step 2 just because a diagram already exists.
 
 Apply the canonical requirements in [`POLICY.md`](POLICY.md) when authoring, reading, extracting, reviewing, or validating diagrams. This skill is procedural; the policy is normative.
 
-**Policy compatibility gate:** this skill declares policy revision `2.1`. Before use, inspect the governing policy and verify its revision. If the policy is missing or unreadable, stop the affected operation and report compatibility as unverified. If the skill is behind the policy, stop until updated. If the skill declares a later revision than the available policy, stop and verify the authoritative policy distribution. If policy and skill conflict, identify the conflicting provisions and impact, then stop the affected operation until an authorized resolution is recorded. Do not treat missing policy as absence of constraints.
+**Policy compatibility gate:** this skill declares policy revision `2.2`. Before use, inspect the governing policy and verify its revision. If the policy is missing or unreadable, stop the affected operation and report compatibility as unverified. If the skill is behind the policy, stop until updated. If the skill declares a later revision than the available policy, stop and verify the authoritative policy distribution. If policy and skill conflict, identify the conflicting provisions and impact, then stop the affected operation until an authorized resolution is recorded. Do not treat missing policy as absence of constraints.
 
 ## 2. Establish intended structure
 
@@ -45,7 +45,35 @@ If no structured baseline exists, build the smallest reference that the authorit
 
 1. Define the concern and intended audience. Apply the single-concern rule, checking the canonical policy for scoped exceptions before splitting a graph.
 2. List the required nodes, relationships, decisions, conditions, cycles, boundaries, terminal states, and invariants before writing Mermaid.
-3. Use Mermaid source only. Prefer clear node IDs and labels that preserve domain terms.
+3. Select the Mermaid diagram type from the semantics:
+   - Use `flowchart` for process/workflow sequences, decision paths, dependencies, routing, and control-flow topology.
+   - Use `stateDiagram-v2` when the model is primarily a set of states and state-dependent transitions, including events, guards, lifecycle changes, and state constraints.
+   - Do not represent a state machine as a flowchart merely because its transitions can be drawn as arrows; equally, do not use a state diagram to depict ordinary procedural steps.
+   - When both process flow and state-dependent behaviour matter, create two complementary diagrams, name each concern, and cross-reference them. Do not collapse distinct semantics into one overloaded diagram.
+   - If the authoritative source does not establish which semantic model applies, record the ambiguity and resolve it before authoring.
+
+   **Flowchart — workflow and decision path:**
+
+   ```mermaid
+   flowchart TD
+       A[Receive request] --> B{Request valid?}
+       B -->|Yes| C[Process request]
+       B -->|No| D[Reject request]
+   ```
+
+   **State diagram — state lifecycle and guarded transitions:**
+
+   ```mermaid
+   stateDiagram-v2
+       [*] --> Pending
+       Pending --> Active: approve [checks_pass]
+       Pending --> Rejected: reject
+       Active --> Suspended: suspend [policy_allows]
+       Suspended --> Active: resume [checks_pass]
+       Active --> [*]: complete
+       Rejected --> [*]
+   ```
+4. Use Mermaid source only. Prefer clear node IDs and labels that preserve domain terms.
 4. Use `{"Decision?"}` for flowchart decision nodes and label every outcome edge.
 5. Represent cycles and feedback as explicit edges.
 6. Use edge styles consistently: `-->` transition/flow; `-.-` observational/relational; `-.->` directional observational. Label relationships where style alone would be ambiguous.
