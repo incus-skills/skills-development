@@ -10,7 +10,7 @@ description: >
   reconstructing decisions, extracting requirements or design intent,
   analysing correction sequences, or preparing session material for further
   AI processing.
-version: "1.0.0"
+version: "1.0.1"
 metadata:
   policy_revision: "2.2"
 ---
@@ -19,25 +19,18 @@ metadata:
 
 ## Quick procedure
 
-1. Identify the source representation and record its structural capabilities and limitations.
-2. Extract and preserve message identities, ordering, parent relationships and branches where available.
-3. Establish source coverage and create a structural index before interpreting the material.
-4. Select and record one or more observation points.
-5. Select traversal direction(s): forward, backward, branch or combined.
-6. Establish chunk boundaries and record chunk evidence and provenance before observer analysis.
-7. Apply the requested observer position(s) independently.
-8. Reconcile independent findings only after both analyses are complete.
-9. Validate source, traversal and analytical coverage separately.
-10. Produce reconstructable artifacts and report unresolved questions and limitations.
+1. Identify the source representation and the structural information actually available.
+2. Select a useful observation point and traversal direction.
+3. Chunk the material to expose turn-by-turn interactional development; retain enough evidence to interpret each chunk.
+4. Apply the requested observer position(s) independently.
+5. Reconcile independent findings only when both analyses are requested.
+6. Produce a concise analytical account that supports renewed engagement, noting material uncertainties and access limitations.
 
-Do not flatten a tree-preserving source merely to simplify chunking. Do not treat
-a fully indexed source as fully traversed or analysed.
+Do not mistake a source's available structure for the interaction itself. Use structural detail where it materially improves analysis; do not pursue exhaustive indexing or coverage for its own sake.
 
 ## 1. Purpose and scope
 
-This skill provides a repeatable method for extracting, chunking and analysing
-AI conversation sessions without prematurely flattening their structure,
-compressing their meaning or imposing a single interpretation.
+This skill provides a method for chunking and analysing AI conversation sessions so a new session can engage with related topics from an informed but necessarily different observer position. It reconstructs interactional development, not the original session state.
 
 It supports two independent observer positions:
 
@@ -51,23 +44,21 @@ It supports two independent observer positions:
 The observers are complementary, not interchangeable. Their findings must
 remain separate until an explicit reconciliation stage.
 
-The skill also supports selection of an observation point within a conversation
-tree. Analysis does not have to begin at the beginning of a session. A later
-message, correction, branch or stabilised formulation may provide a more
-productive starting position.
+The skill accepts that extraction into a new session may flatten or lose context. It does not attempt to eliminate that loss, reproduce the original observer position, or transfer the original interaction. A later message, correction, branch or formulation may provide a useful starting point for analysis.
 
-### 1.1 Objectives
+### 1.1 Scope boundary: analytical reconstruction, not preservation or handoff
 
-- Preserve source structure, provenance and relationships.
-- Establish meaningful chunk boundaries without losing context.
-- Support forward, backward and branch-based traversal.
-- Make observation-point selection explicit.
-- Analyse the same evidence from distinct observer positions.
-- Identify corrections, constraints, implicit requirements and unresolved
-  distinctions.
-- Preserve contradictions and uncertainty rather than forcing coherence.
-- Produce outputs that another AI can inspect and reconstruct without depending
-  on the original conversation.
+Session-thread mining is not a preservation discipline, continuity system or handoff protocol. It does not aim to retain or transfer the original interaction, reproduce its context, or reinstate its observer position.
+
+Chunking reconstructs the turn-by-turn development and effects of interaction. This differs from treating the chat history as a single document for summarisation or thematic extraction: it makes responses, corrections, emerging distinctions, changes of direction and abandoned lines of inquiry available for renewed analysis.
+
+The new session is a distinct observer. Some flattening, transformation and loss of context are accepted. The resulting account is an analytical basis for engaging with related topics; it does not confer continuity of identity, context or responsibility between sessions.
+
+The objective is interactional reconstructability sufficient for renewed engagement, not preservation of the original interaction.
+
+### 1.2 Design constraint: efficiency relative to outcome
+
+Prefer the least procedural and contextual overhead that produces a useful analytical result. Add detail only when it materially improves renewed engagement enough to justify its cost. Aim for sufficiency, not exhaustiveness; define essential distinctions and safeguards, but leave routine judgement to the agent. Do not compress away interactional development necessary to understand how the discussion changed.
 
 ### 1.2 Foundational principles
 
@@ -75,13 +66,13 @@ productive starting position.
 |---|---|
 | Observation precedes interpretation | Establish source structure before assigning meaning. |
 | Distinction precedes classification | Record distinctions before categorising them. |
-| Provenance precedes synthesis | Every analytical claim must be traceable to source evidence. |
-| Structure precedes flattening | Preserve message and branch relationships when available. |
+| Evidence precedes synthesis | Material analytical claims should be supportable from the available source evidence. |
+| Structure informs analysis | Use message and branch relationships when available and materially relevant; do not treat their retention as an end in itself. |
 | Observation position matters | Record where analysis begins and what it can see. |
 | Reconstruction precedes reconciliation | Complete independent observer analyses before combining them. |
 | Correction is evidence | Treat corrections as evidence of requirements, constraints or interpretive failures. |
 | Uncertainty is preserved | Do not turn inference into historical fact. |
-| Reconstructability is the preservation target | Preserve the information needed to repeat or challenge the analysis. |
+| Renewed engagement is the outcome | Include enough evidence and context for a new observer to understand the interactional development relevant to the task. |
 
 ## 2. Source recognition and structural preservation
 
@@ -242,7 +233,7 @@ When a tree-preserving source is available:
 6. Record missing or ambiguous relationships.
 7. Never silently convert a tree into a linear narrative.
 
-The tree is source evidence, not merely a navigation convenience.
+Tree relationships can clarify interactional development. Consider them when they matter to the selected analysis; exhaustive structural preservation is not required.
 
 ## 3. Observation-point selection
 
@@ -527,10 +518,9 @@ analysis records linked to the same chunk identifier.
 
 These must not be conflated.
 
-## 7. Coverage model
+## 7. Analytical scope
 
-Coverage has three independent dimensions. Report each separately; none may
-stand in for another.
+When scope needs to be reported, distinguish these three dimensions. They are practical indicators of what the analysis covered, not completeness guarantees or preservation obligations.
 
 ### 7.1 Source coverage
 
@@ -716,10 +706,9 @@ stateDiagram-v2
     Published --> [*]
 ```
 
-## 10. Analysis artifacts
+## 10. Analysis outputs
 
-Artifact names may be adapted to the project, but retain the logical
-separation.
+Use only the outputs needed to make the analysis useful and intelligible. The following are possible forms, not a mandatory artifact package.
 
 | Artifact | Purpose |
 |---|---|
@@ -820,9 +809,9 @@ Check for:
 - Confusion between traversal and analysis.
 - Confusion between capability availability and execution isolation.
 
-### 11.4 Reconstructability test
+### 11.4 Renewed-engagement test
 
-A subsequent AI should be able to use the produced artifacts to answer:
+A new session should be able to use the analytical account, without pretending to inherit the original context, to answer:
 
 1. What source material was examined?
 2. Where did each finding originate?
@@ -833,10 +822,9 @@ A subsequent AI should be able to use the produced artifacts to answer:
 7. What was inferred?
 8. What source material was indexed, traversed and analysed?
 9. Which findings remain unresolved?
-10. Could the analysis be repeated or challenged without the original
-    analyst's undocumented assumptions?
+10. Does the account provide enough grounding to engage with the related topic while making material uncertainty visible?
 
-If not, the artifacts are not yet sufficiently reconstructable.
+If not, add only the context or evidence needed to improve that engagement.
 
 ## 12. Diagram policy
 
@@ -965,14 +953,13 @@ correct diagram type is part of semantic clarity.
 
 ## 14. Completion criteria
 
-A session-mining operation is complete only when its requested scope has been
-examined and its limitations are explicit.
+A session-mining operation is complete when it has produced an account sufficient for its intended renewed engagement, with material limitations made clear. Exhaustive source accounting, traversal or artifact production is not required.
 
 | Requirement | Completion condition |
 |---|---|
 | Source recognition | Access mechanism, available representation, underlying-source limits and transformations recorded |
-| Structural preservation | Available relationships indexed |
-| Source coverage | Supplied source accounted for, with exclusions and gaps recorded |
+| Structural awareness | Relevant available relationships considered |
+| Source scope | Relevant source material identified; material gaps noted |
 | Observation selection | Observation point and rationale recorded |
 | Traversal | Selected directions, paths and traversal coverage documented |
 | Evidence establishment | Chunks have stable identifiers and source references |
@@ -981,7 +968,7 @@ examined and its limitations are explicit.
 | Intentional analysis | Completed when requested |
 | Independence | Observer findings remain separately identifiable |
 | Reconciliation | Completed when both observers are requested |
-| Provenance | Material claims traceable to source evidence |
+| Evidence grounding | Material claims supportable from available source evidence |
 | Validation | Reconstructability and uncertainty assessed |
 
 A single-observer analysis can be complete within its requested scope. It must
@@ -989,17 +976,15 @@ not be presented as a completed dual-observer analysis.
 
 ## 15. Core methodological statement
 
-> Interpret a conversation both as a record of how an outcome became
-> reconstructable and as a possible correction process through which an
-> intended outcome became communicable to an AI.
+> Examine a conversation as a sequence of interactions whose effects develop
+> through responses, distinctions, corrections and changes of direction.
+> Chunking makes that development available to a new observer, who may begin
+> from any useful point and examine it forward, backward or across branches.
 >
-> Preserve the source structure, select observation points deliberately,
-> traverse in the direction that exposes the relevant relationships, and
-> maintain independent observer positions until reconciliation.
->
-> Preserve not only what was concluded, but the evidence, distinctions,
-> relationships, corrections and uncertainties necessary to reconstruct why
-> that conclusion became possible.
+> The new observer does not inherit the original session's position or context.
+> The method accepts loss and transformation, using enough source evidence to
+> support useful renewed engagement without turning analysis into preservation
+> or handoff.
 
-The preservation target is reconstructability, not merely the final summary
-or artifact.
+The governing measure is efficiency relative to outcome: retain or add only
+what materially improves the new session's ability to engage with the subject.
